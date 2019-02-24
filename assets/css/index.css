@@ -10,3 +10,28 @@
 .game-name{
   padding-left: 10px;
 }
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+footer {
+  background-color: black; 
+  color: white;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  width: 100%;
+  overflow:hidden;
+  padding: 2px;
+}
+
+
+.all-pokes{
+  padding-bottom: 60px;
+  margin-bottom: 60px;
+}

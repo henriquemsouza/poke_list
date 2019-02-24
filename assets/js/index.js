@@ -13,14 +13,16 @@ function getPokeList(amount) {
   if (!amount) {
     amount = 20
   }
+  showLoad();
   $.ajax({
     url: `https://pokeapi.co/api/v2/pokemon/?limit=${amount}`,
     method: 'GET',
     success: (resp) => {
       build(resp, 'poke')
+      hideLoad()
     },
     error: (err) => {
-
+      hideLoad()
     }
   })
 }
@@ -29,14 +31,16 @@ function getPokeMoves(amount) {
   if (!amount) {
     amount = 20
   }
+  showLoad();
   $.ajax({
     url: `https://pokeapi.co/api/v2/move/?limit=${amount}`,
     method: 'GET',
     success: (resp) => {
       build(resp, 'move')
+      hideLoad()
     },
     error: (err) => {
-
+      hideLoad()
     }
   })
 
@@ -50,7 +54,10 @@ function build(resp, type) {
     <tr>
       <td>${val.name}</td>
       <td class="more-info-${i}"></td>
-      <td> <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='btn btn-dark more-inf' value="Detalhes"></td>
+      <td> 
+      <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='less-inf-${i} close-btn collapse btn btn-danger' value="Fechar">
+      <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='btn btn-dark more-inf' value="Detalhes">
+      </td>
     </tr>
     `
   });
@@ -61,16 +68,18 @@ function moreInfoPoke(e) {
   let url = $(e).data('link');
   let number = $(e).data('number');
   $(`.more-info-${number}`).html('');
-
+  showLoad();
   $.ajax({
     url: url,
     method: 'GET',
     success: (resp) => {
       console.log(resp)
       buildPokeInfo(resp, number);
+      $(`.less-inf-${number}`).removeClass("collapse");
+      hideLoad()
     },
     error: (err) => {
-
+      hideLoad()
     }
   })
 }
@@ -130,6 +139,18 @@ function buildPokeInfo(resp, number) {
 
 }
 
+function clearMoreInfo(number) {
+  $(`.less-inf-${number}`).addClass("collapse");
+  $(`.more-info-${number}`).html('');
+}
+
+function showLoad(){
+  $('.load-div').removeClass("collapse");
+}
+
+function hideLoad(){
+  $('.load-div').addClass("collapse");
+}
 
 $(function () {
   $(document).on("click", '.more-inf', function () {
@@ -146,5 +167,13 @@ $(function () {
       $(`.more-info-${number}`).html(temp_msg);
     }
 
+  });
+});
+
+
+$(function () {
+  $(document).on("click", '.close-btn', function () {
+    let number = $(this).data('number');
+    clearMoreInfo(number)
   });
 });

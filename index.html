@@ -5,7 +5,7 @@
   <meta name="author" content="Henrique ms">
   <meta name="description" content="Pokemons for all">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Pokes</title>
+  <title>Poke List</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -50,9 +50,21 @@
     </div>
     <br>
   </div>
+  <div class="col-md-12 load-div collapse text-center">
+    <div class="spinner-grow" role="status">
+    </div>
+    <div class="spinner-grow text-success" role="status">
+    </div>
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <div class="spinner-grow text-danger" role="status">
+    </div>
+    <div class="spinner-grow" role="status">
+    </div>
+  </div>
 
   <div class="col-md-12">
-    <table class="all-games table table-striped table-hover tablesorter">
+    <table class="all-pokes table table-striped table-hover tablesorter">
       <thead>
         <tr>
           <th>Pokemon</th>
@@ -65,10 +77,14 @@
       </tbody>
     </table>
   </div>
-
+  <br>
+  <br>
+  <br>
 
   <footer class="footer">
-
+    <P>Informações obtidas através da <a href="https://pokeapi.co/" target="_blank">PokeAPI</a></P>
+    <a href="https://github.com/henriquemsouza/poke_list" target="_blank"><i class="nes-icon github git-cat"> </i></a>
+    <P>© 2019 </P>
   </footer>
 </body>
 
