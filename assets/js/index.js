@@ -1,30 +1,36 @@
 $(document).ready(function () {
-  $('.load-games').on('click', function() {
-    getPokeList();
+  $('.load-games').on('click', function () {
+    getPokeList($('.amount').val());
   });
 
-  $('.load-moves').on('click', function() {
-    getPokeMoves();
+  $('.load-moves').on('click', function () {
+    getPokeMoves($('.amount').val());
   });
 })
 
 
-function getPokeList(){  
+function getPokeList(amount) {
+  if(!amount){
+    amount = 20
+  }
   $.ajax({
-    url: 'https://pokeapi.co/api/v2/pokemon/?limit=10',
+    url: `https://pokeapi.co/api/v2/pokemon/?limit=${amount}`,
     method: 'GET',
     success: (resp) => {
       build(resp)
     },
     error: (err) => {
-    
+
     }
   })
 }
 
-function getPokeMoves(){  
+function getPokeMoves(amount) {
+  if(!amount){
+    amount = 20
+  }
   $.ajax({
-    url: 'https://pokeapi.co/api/v2/move/?limit=10',
+    url: `https://pokeapi.co/api/v2/move/?limit=${amount}`,
     method: 'GET',
     success: (resp) => {
 
@@ -32,13 +38,13 @@ function getPokeMoves(){
       build(resp)
     },
     error: (err) => {
-    
+
     }
   })
 
 }
 
-function build(resp){
+function build(resp) {
   let content = '';
   $.each(resp.results, function (i, val) {
     content += `
