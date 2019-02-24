@@ -60,19 +60,37 @@ function build(resp) {
 function moreInfoPoke(e) {
   let url = $(e).data('link');
   let number = $(e).data('number');
-
+  $(`.more-info-${number}`).html('');
 
   $.ajax({
     url: url,
     method: 'GET',
     success: (resp) => {
       console.log(resp)
+      let abilities = '';
+      $.each(resp.abilities, function (i, val) {
+        abilities += `
+        <p>Habilidade: ${val.ability.name}</p>
+        `
+      });
       let content = `
      <div class="nes-container is-dark with-title">
-        <p class="title">ingo/p>
-        <p>Habilidade: ${resp.abilities[0].ability.name}</p>
+        <p class="title">${resp.name}</p>
+        <div class="row">
+          <div class="col-md-4">
+          <p>Peso: ${resp.weight}</p>
+          <p>Experiência Base: ${resp.base_experience}</p>
+          ${abilities}
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <img src="${resp.sprites.front_default}" alt="front_default">
+            <img src="${resp.sprites.back_default}" alt="back_default">
+            </div>
+          </div>
+        </div>
       </div>`;
-      $(`more-info-${number}`).html(content);
+      $(`.more-info-${number}`).html(content);
     },
     error: (err) => {
 
