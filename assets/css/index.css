@@ -2,3 +2,11 @@
   background-color: black;
   color: white;
 }
+
+.info-table{
+  width: 100%;
+}
+
+.game-name{
+  padding-left: 10px;
+}
