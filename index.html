@@ -14,9 +14,25 @@
   <!-- <script src="scripts.js"></script> -->
   <script type="text/javascript" src="assets/js/index.js"></script>
 
+  <!-- minify -->
+  <link href="https://unpkg.com/nes.css@2.0.0/css/nes.min.css" rel="stylesheet" />
+  <!-- latest -->
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+  <!-- core style only -->
+  <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+
 </head>
 
 <body>
+
+  <header class="header">
+    <div class="container">
+      <h1>Poke List</h1>
+    </div>
+    <hr>
+  </header>
 
   <div class="container">
     <div class="col-sm">
@@ -24,13 +40,13 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <input class="load-games btn btn-dark" type="button" value="Listar Pokemons">
+        <input class="load-games nes-btn" type="button" value="Listar Pokemons">
       </div>
       <div class="col-md-4">
-        <input class="load-moves btn btn-dark" type="button" value="Listar Moves">
+        <input class="load-moves nes-btn" type="button" value="Listar Moves">
       </div>
       <div class="col-md-4">
-        <input type="number" class="form-control amount" placeholder="Quantidade" aria-label="amount">
+        <input type="number" class="nes-input amount" placeholder="Quantidade" aria-label="amount">
       </div>
     </div>
     <br>
@@ -41,7 +57,8 @@
       <thead>
         <tr>
           <th>nome</th>
-          <th>url</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody class='main-tbody'>
@@ -49,6 +66,11 @@
       </tbody>
     </table>
   </div>
+
+
+  <footer class="footer">
+
+  </footer>
 </body>
 
 </html>
