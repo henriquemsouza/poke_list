@@ -54,7 +54,7 @@ function build(resp, type) {
     <tr>
       <td>${val.name}</td>
       <td class="more-info-${i}"></td>
-      <td> 
+      <td>
       <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='less-inf-${i} close-btn collapse btn btn-danger' value="Fechar">
       <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='btn btn-dark more-inf' value="Detalhes">
       </td>
@@ -152,19 +152,38 @@ function hideLoad(){
   $('.load-div').addClass("collapse");
 }
 
+function moreInfoMove(e) {
+  let url = $(e).data('link');
+  let number = $(e).data('number');
+  $(`.more-info-${number}`).html('');
+
+  showLoad();
+  $.ajax({
+    url: url,
+    method: 'GET',
+    success: (resp) => {
+      console.log(resp)
+      let temp_msg = `<div class="message -right">
+                      <div class="nes-balloon from-right">
+                        <p>${resp.accuracy}</p>
+                      </div>
+                    </div>`;
+      $(`.more-info-${number}`).html(temp_msg);
+      hideLoad()
+    },
+    error: (err) => {
+      hideLoad()
+    }
+  })
+}
+
 $(function () {
   $(document).on("click", '.more-inf', function () {
     let type = $(this).data('type');
     if (type == 'poke') {
       moreInfoPoke(this)
     } else {
-      let number = $(this).data('number');
-      let temp_msg = `<div class="message -right">
-                      <div class="nes-balloon from-right">
-                        <p>?????</p>
-                      </div>
-                    </div>`
-      $(`.more-info-${number}`).html(temp_msg);
+      moreInfoMove(this)
     }
 
   });
