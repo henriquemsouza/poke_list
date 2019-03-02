@@ -8,12 +8,14 @@ $(document).ready(function () {
   });
 })
 
-
 function getPokeList(amount) {
   if (!amount) {
     amount = 20
   }
+
   showLoad();
+  $('.action-title').html('Pokemon');
+
   $.ajax({
     url: `https://pokeapi.co/api/v2/pokemon/?limit=${amount}`,
     method: 'GET',
@@ -31,7 +33,10 @@ function getPokeMoves(amount) {
   if (!amount) {
     amount = 20
   }
+
   showLoad();
+  $('.action-title').html('Movimento');
+
   $.ajax({
     url: `https://pokeapi.co/api/v2/move/?limit=${amount}`,
     method: 'GET',
@@ -44,6 +49,10 @@ function getPokeMoves(amount) {
     }
   })
 
+}
+
+function setActionTitle(text) {
+  $('.action-title').html();
 }
 
 function build(resp, type) {
@@ -144,11 +153,11 @@ function clearMoreInfo(number) {
   $(`.more-info-${number}`).html('');
 }
 
-function showLoad(){
+function showLoad() {
   $('.load-div').removeClass("collapse");
 }
 
-function hideLoad(){
+function hideLoad() {
   $('.load-div').addClass("collapse");
 }
 
@@ -165,7 +174,9 @@ function moreInfoMove(e) {
       console.log(resp)
       let temp_msg = `<div class="message -right">
                       <div class="nes-balloon from-right">
-                        <p>${resp.accuracy}</p>
+                        <p>Precisão: ${resp.accuracy}</p>
+                        <p>PP: ${resp.pp}</p>
+                        <p>Power: ${resp.power}</p>
                       </div>
                     </div>`;
       $(`.more-info-${number}`).html(temp_msg);
