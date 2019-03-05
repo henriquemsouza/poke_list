@@ -61,7 +61,7 @@ function build(resp, type) {
   $.each(resp.results, function (i, val) {
     content += `
     <tr>
-      <td>${val.name}</td>
+      <td>${capitalizeString(val.name)}</td>
       <td class="more-info-${i}"></td>
       <td>
       <input type="button" data-link='${val.url}' data-number='${i}' data-type='${type}' class='less-inf-${i} close-btn collapse btn btn-danger' value="Fechar">
@@ -70,7 +70,13 @@ function build(resp, type) {
     </tr>
     `
   });
-  $('.main-tbody').html(content);
+  $('.main-tbody').html(content)
+}
+
+function capitalizeString(str) {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
 
 function moreInfoPoke(e) {
@@ -97,18 +103,18 @@ function buildPokeInfo(resp, number) {
   let game_indices = '';
   $.each(resp.game_indices, function (i, val) {
     game_indices += `
-    <p class="game-name">${val.version.name}</p>
+    <p class="game-name">${capitalizeString(val.version.name)}</p>
     `
   });
 
   let types = [];
   $.each(resp.types, function (i, val) {
-    types.push(val.type.name)
+    types.push(capitalizeString(val.type.name))
   });
   let moves = '';
   $.each(resp.moves, function (i, val) {
     moves += `
-    <p>${val.move.name}</p>
+    <p>${capitalizeString(val.move.name)}</p>
     `
   });
 
