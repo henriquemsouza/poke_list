@@ -178,11 +178,13 @@ function moreInfoMove(e) {
     method: 'GET',
     success: (resp) => {
       console.log(resp)
+
       let temp_msg = `<div class="message -right">
                       <div class="nes-balloon from-right">
                         <p>Precisão: ${resp.accuracy}</p>
                         <p>PP: ${resp.pp}</p>
                         <p>Power: ${resp.power}</p>
+                        <p>Tipo: ${capitalizeString(resp.type.name)}</p>
                       </div>
                     </div>`;
       $(`.more-info-${number}`).html(temp_msg);
